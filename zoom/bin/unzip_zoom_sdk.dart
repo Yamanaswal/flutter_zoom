@@ -1,7 +1,6 @@
 import 'dart:core';
 import 'dart:io';
 import 'dart:convert';
-//import 'package:dio/dio.dart';
 
 void main(List<String> args) async {
   var location = Platform.script.toString();
@@ -13,9 +12,8 @@ void main(List<String> args) async {
     var scriptDir = sd.join(Platform.pathSeparator);
     var packageConfigPath = [scriptDir, '..', '..', '..', 'package_config.json']
         .join(Platform.pathSeparator);
-    // print(packageConfigPath);
+
     var jsonString = File(packageConfigPath).readAsStringSync();
-    // print(jsonString);
     Map<String, dynamic> packages = jsonDecode(jsonString);
     var packageList = packages["packages"];
     String? zoomFileUri;
@@ -38,31 +36,8 @@ void main(List<String> args) async {
   }
   if (!isNewFlutter)
     location = location.replaceFirst("/bin/unzip_zoom_sdk.dart", "");
-  // var filename =
-  //     location + '/ios-sdk/MobileRTC${(args.length == 0) ? "" : "-dev"}.zip';
 
   await checkAndDownloadSDK(location);
-  // print('Decompressing ' + filename);
-
-  // final bytes = File(filename).readAsBytesSync();
-
-  // final archive = ZipDecoder().decodeBytes(bytes);
-
-  // var current = new File(location + '/ios/MobileRTC.framework/MobileRTC');
-  // var exist = await current.exists();
-  // if (exist) current.deleteSync();
-
-  // for (final file in archive) {
-  //   final filename = file.name;
-  //   if (file.isFile) {
-  //     final data = file.content as List<int>;
-  //     File(location + '/ios/MobileRTC.framework/' + filename)
-  //       ..createSync(recursive: true)
-  //       ..writeAsBytesSync(data);
-  //   }
-  // }
-
-  print('Complete');
 }
 
 Future<void> checkAndDownloadSDK(String location) async {
@@ -90,16 +65,14 @@ Future<void> checkAndDownloadSDK(String location) async {
   exists = await File(androidCommonLibFile).exists();
   if (!exists) {
     await downloadFile(
-        Uri.parse(
-            'https://com21-static.s3.sa-east-1.amazonaws.com/zoom/android/commonlib.aar?dl=1'),
+        Uri.parse('https://edmingle.b-cdn.net/mobile-zoom/commonlib.aar'),
         androidCommonLibFile);
   }
   var androidRTCLibFile = location + '/android/libs/mobilertc.aar';
   exists = await File(androidRTCLibFile).exists();
   if (!exists) {
     await downloadFile(
-        Uri.parse(
-            'https://com21-static.s3.sa-east-1.amazonaws.com/zoom/android/mobilertc.aar?dl=1'),
+        Uri.parse('https://edmingle.b-cdn.net/mobile-zoom/mobilertc.aar'),
         androidRTCLibFile);
   }
 }
@@ -107,11 +80,6 @@ Future<void> checkAndDownloadSDK(String location) async {
 Future<void> downloadFile(Uri uri, String savePath) async {
   print('Download ${uri.toString()} to $savePath');
   File destinationFile = await File(savePath).create(recursive: true);
-  // var dio = Dio();
-  // dio.options.connectTimeout = 1000000;
-  // dio.options.receiveTimeout = 1000000;
-  // dio.options.sendTimeout = 1000000;
-  // await dio.downloadUri(uri, savePath);
   final request = await HttpClient().getUrl(uri);
   final response = await request.close();
   await response.pipe(destinationFile.openWrite());
