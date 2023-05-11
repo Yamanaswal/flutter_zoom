@@ -47,7 +47,7 @@ Future<void> checkAndDownloadSDK(String location) async {
 
   if (!exists) {
     await downloadFile(
-        Uri.parse('https://edmingle.b-cdn.net/mobile-zoom/iOS/MobileRTC'),
+        Uri.parse('https://edmingle.b-cdn.net/mobile-zoom/iOS/5/ios-arm64_armv7/MobileRTC'),
         iosSDKFile);
   }
 
@@ -57,7 +57,7 @@ Future<void> checkAndDownloadSDK(String location) async {
 
   if (!exists) {
     await downloadFile(
-        Uri.parse('https://edmingle.b-cdn.net/mobile-zoom/iOS/simulator/MobileRTC'),
+        Uri.parse('https://edmingle.b-cdn.net/mobile-zoom/iOS/5/ios-x86_64-simulator/MobileRTC'),
         iosSimulateSDKFile);
   }
 
@@ -65,14 +65,14 @@ Future<void> checkAndDownloadSDK(String location) async {
   exists = await File(androidCommonLibFile).exists();
   if (!exists) {
     await downloadFile(
-        Uri.parse('https://edmingle.b-cdn.net/mobile-zoom/commonlib.aar'),
+        Uri.parse('https://edmingle.b-cdn.net/mobile-zoom/android/5.14.5.13410/commonlib.aar'),
         androidCommonLibFile);
   }
   var androidRTCLibFile = location + '/android/libs/mobilertc.aar';
   exists = await File(androidRTCLibFile).exists();
   if (!exists) {
     await downloadFile(
-        Uri.parse('https://edmingle.b-cdn.net/mobile-zoom/mobilertc.aar'),
+        Uri.parse('https://edmingle.b-cdn.net/mobile-zoom/android/5.14.5.13410/mobilertc.aar'),
         androidRTCLibFile);
   }
 }
