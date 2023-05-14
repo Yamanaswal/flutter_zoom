@@ -45,6 +45,9 @@ public class ZoomPlugin implements FlutterPlugin, MethodCallHandler,ActivityAwar
 
         meetingStatusChannel = new EventChannel(flutterPluginBinding.getBinaryMessenger(), "plugins.webcare/zoom_event_stream");
     }
+    
+    @Override
+    public void onNotificationServiceStatus(SDKNotificationServiceStatus status) {}
 
     @Override
     public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
