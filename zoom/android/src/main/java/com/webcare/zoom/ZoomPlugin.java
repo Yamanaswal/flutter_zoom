@@ -181,7 +181,7 @@ public class ZoomPlugin implements FlutterPlugin, MethodCallHandler,ActivityAwar
         
         StartMeetingParamsWithoutLogin params = new StartMeetingParamsWithoutLogin();
 
-        params.userId = options.get("userId");
+        //params.userId = options.get("userId");
         params.displayName = options.get("displayName");
         params.meetingNo = options.get("meetingId");
         params.userType = MeetingService.USER_TYPE_API_USER;
