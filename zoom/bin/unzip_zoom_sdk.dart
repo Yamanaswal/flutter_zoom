@@ -65,14 +65,14 @@ Future<void> checkAndDownloadSDK(String location) async {
   exists = await File(androidCommonLibFile).exists();
   if (!exists) {
     await downloadFile(
-        Uri.parse('https://edmingle.b-cdn.net/mobile-zoom/android/5.13.0.10919/commonlib.aar'),
+        Uri.parse('https://edmingle.b-cdn.net/mobile-zoom/android/5.13.10.12577/commonlib.aar'),
         androidCommonLibFile);
   }
   var androidRTCLibFile = location + '/android/libs/mobilertc.aar';
   exists = await File(androidRTCLibFile).exists();
   if (!exists) {
     await downloadFile(
-        Uri.parse('https://edmingle.b-cdn.net/mobile-zoom/android/5.13.0.10919/mobilertc.aar'),
+        Uri.parse('https://edmingle.b-cdn.net/mobile-zoom/android/5.13.10.12577/mobilertc.aar'),
         androidRTCLibFile);
   }
 }
